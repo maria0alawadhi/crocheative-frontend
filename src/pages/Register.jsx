@@ -10,7 +10,8 @@ const Register = () => {
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    role: ''
   })
 
   const handleChange = (e) => {
@@ -19,17 +20,13 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await RegisterUser({
-      name: formValues.name,
-      email: formValues.email,
-      password: formValues.password,
-      role: formValues.role
-    })
+    await RegisterUser(formValues)
     setFormValues({
       name: '',
       email: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      role: ''
     })
     navigate('/signin')
   }
@@ -83,11 +80,25 @@ const Register = () => {
                 required
               />
             </div>
+            <div className="input-wrapper">
+              <label htmlFor="role">Role</label>
+              <select
+                onChange={handleChange}
+                name="role"
+                value={formValues.role}
+                required
+              >
+                <option>Select Role</option>
+                <option value="admin">Admin</option>
+                <option value="client">Client</option>
+              </select>
+            </div>
             <button
               disabled={
                 !formValues.email ||
                 (!formValues.password &&
-                  formValues.confirmPassword === formValues.password)
+                  formValues.confirmPassword === formValues.password) ||
+                !formValues.role
               }
             >
               Register

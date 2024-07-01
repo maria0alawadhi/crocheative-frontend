@@ -1,7 +1,8 @@
 import React from 'react'
 
-const Home = () => {
-  return <div></div>
+const Home = ({ role }) => {
+  console.log(role)
+  return <div>Hi </div>
 }
 
 export default Home

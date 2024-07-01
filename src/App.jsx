@@ -8,11 +8,9 @@ import Home from './pages/Home'
 import AboutUs from './pages/AboutUs'
 import Header from './components/Header'
 
-
-
 const App = () => {
   const [user, setUser] = useState(null)
-
+  const role = localStorage.getItem('role')
   const checkToken = async () => {
     const user = await CheckSession()
     setUser(user)
@@ -35,8 +33,11 @@ const App = () => {
       <Header user={user} handleLogOut={handleLogOut} />
       <main>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/signin" element={<SignIn setUser={setUser} />} />
+          <Route path="/" element={<Home role={role} />} />
+          <Route
+            path="/signin"
+            element={<SignIn setUser={setUser}  />}
+          />
           <Route path="/register" element={<Register />} />
           <Route path="/AboutUs" element={<AboutUs />} />
         </Routes>
