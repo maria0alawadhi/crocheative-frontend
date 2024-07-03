@@ -1,4 +1,6 @@
-# Crocheative-frontend
+# crocheative-Frontend
+#### Back-end repo : [crocheative-backend](https://github.com/maria0alawadhi/crocheative-backend)
+---
 
 ### Group members:
 
@@ -33,20 +35,9 @@
 
 ##### A Trello board was used to keep track of development progress and can be viewed [here](https://trello.com/b/EUQNvHfp/hotel-project).
 
+##### [Entity Relationship Diagram](image.png)
+##### [Components Hierarchy](image-2.png)
 <!-- ##### a Draw.io diagram was used to illustrate the Entity Relationship Diagram (ERD) for the job application system project and can be viewed [here](https://www.canva.com/). -->
-
----
-
-### **_Entity Relationship Diagram_**
-[Entity Relationship Diagram](image.png)
----
-
-### **_Components Hierarchy_**
-[Components Hierarchy](image-2.png)
----
-
-
-### **_Wire Frame_**
 
 ---
 
