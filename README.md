@@ -33,7 +33,7 @@
 
 #####  Admin can add products, prices, and quantities..
 
-##### A Trello board was used to keep track of development progress and can be viewed [here](https://trello.com/b/EUQNvHfp/hotel-project).
+##### A Trello board was used to keep track of development progress and can be viewed [here](https://trello.com/b/8yUaxHsC/crocheative)
 
 ##### Entity Relationship Diagram [Here](https://www.canva.com/design/DAGJmiMBaoQ/b-ww6jXGDT_mDnCM0x5SfQ/edit?utm_content=DAGJmiMBaoQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 ##### Components Hierarchy Diagram [Here](https://www.canva.com/design/DAGJ5I7FmKc/3lBERCmkhgScyOALwObomw/edit?utm_content=DAGJ5I7FmKc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
