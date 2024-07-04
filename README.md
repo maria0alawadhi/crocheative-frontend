@@ -35,8 +35,9 @@
 
 ##### A Trello board was used to keep track of development progress and can be viewed [here](https://trello.com/b/EUQNvHfp/hotel-project).
 
-##### [Entity Relationship Diagram](image.png)
-##### [Components Hierarchy](image-2.png)
+##### Entity Relationship Diagram [Here](https://www.canva.com/design/DAGJmiMBaoQ/b-ww6jXGDT_mDnCM0x5SfQ/edit?utm_content=DAGJmiMBaoQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+##### Components Hierarchy Diagram [Here](https://www.canva.com/design/DAGJ5I7FmKc/3lBERCmkhgScyOALwObomw/edit?utm_content=DAGJ5I7FmKc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+##### Wireframes [Here](https://www.canva.com/design/DAGJmWeh_O4/bWPaVnBbFH15WtfrqXVsKg/edit)
 <!-- ##### a Draw.io diagram was used to illustrate the Entity Relationship Diagram (ERD) for the job application system project and can be viewed [here](https://www.canva.com/). -->
 
 ---
