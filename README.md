@@ -1,4 +1,4 @@
-# crocheative-Frontend
+# crocheative
 #### Back-end repo : [crocheative-backend](https://github.com/maria0alawadhi/crocheative-backend)
 ---
 
