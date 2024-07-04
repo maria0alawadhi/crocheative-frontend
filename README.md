@@ -12,7 +12,7 @@
 
 ### **_Description_**
 
-#### Crochetive is an online marketplace for handmade crochet items, connecting customers directly with talented crochet artisans. The platform offers a curated selection of unique, high-quality crocheted products across apparel, accessories, home decor, and more. Customers can easily browse, customize, and purchase one-of-a-kind crocheted creations through Crochetive's intuitive interface. It is the destination for crochet enthusiasts and those seeking distinctive handmade goods.
+#### Crochetive is a Website for handmade crochet items, connecting customers directly with talented crochet artisans. The platform offers a curated selection of unique, high-quality crocheted products across apparel, accessories, home decor, and more. Customers can easily browse, customize, and purchase one-of-a-kind crocheted creations through Crochetive's intuitive interface. It is the destination for crochet enthusiasts and those seeking distinctive handmade goods
 
 ---
 
