@@ -132,3 +132,15 @@ button:disabled {
   display: inline-block;
 }
 
+.item-card {
+  border:pink solid 3px;
+  width: 30%;
+  margin: 1%;
+  padding: 2% 1%;
+  color:rgb(172, 5, 33);
+}
+
+
+.title{
+  color:rgb(85, 81, 81);
+}
