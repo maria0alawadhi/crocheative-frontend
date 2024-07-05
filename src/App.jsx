@@ -9,9 +9,6 @@ import SignIn from './pages/SignIn'
 import Home from './pages/Home'
 import Items from './pages/Items'
 import AboutUs from './pages/AboutUs'
-import ItemDetails from './pages/ItemDetails'
-import AddItemForm from './pages/AddItemForm'
-import EditItemForm from './pages/EditItemForm'
 import Cart from './pages/Cart'
 import Header from './components/Header'
 
@@ -59,13 +56,10 @@ const App = () => {
             element={<Home categories={categories} role={role} />}
           />
           <Route path="/:categoryName/items" element={<Items />} />
-          <Route path="/itemDetails" element={<ItemDetails />} />
-          <Route path="/AddItemForm" element={<AddItemForm />} />
-          <Route path="/EditItemForm" element={<EditItemForm />} />
           <Route path="/signin" element={<SignIn setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/AboutUs" element={<AboutUs />} />
-          <Route path="/orders/:userId" element={<Cart user={user} />} />
+          <Route path="/cart" element={<Cart user={user} />} />
         </Routes>
       </main>
     </div>

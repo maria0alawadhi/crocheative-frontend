@@ -1,29 +1,19 @@
-import React from 'react'
-import Client from '../services/api'
-
-const CartCard = ({ order, onRemoveItem }) => {
+const CartCard = ({ orders }) => {
+  console.log('orders:::' + JSON.stringify(orders, null, 2)) // Optional logging
   return (
-    <div className="cart-card">
-      {order.items.map((item) => (
-        <div key={item._id} className="cart-item-container">
-          <div className="cart-item-image">
-            <img src={item.image} alt={item.name} />
-          </div>
-          <div className="cart-item-details">
-            <h3>{item.name}</h3>
-            <p>Quantity: {item.quantity}</p>
-            <p>Price: {item.price.toFixed(2)} BD</p>
-            <button
-              className="remove-button"
-              onClick={() => onRemoveItem(order._id, item._id)}
-            >
-              Remove
-            </button>
-          </div>
+    <div>
+      {orders.map((order) => (
+        <div key={order._id}>
+          {order.items.map((item, index) => (
+            <div key={index} className="cart-card">
+              <img src={item.imgs[0]} />
+              <span>{item.name}</span>
+              <span>price:{item.price}</span>
+            </div>
+          ))}
         </div>
       ))}
     </div>
   )
 }
-
 export default CartCard
