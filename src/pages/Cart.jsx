@@ -1,53 +1,77 @@
 import React, { useState, useEffect } from 'react'
+import CartCard from '../components/CartCard'
 import Client from '../services/api'
+import axios from 'axios'
+import { BASE_URL } from '../services/api'
 import { useParams } from 'react-router'
-import CartCard from './CartCard'
 
-const CartPage = () => {
-  const [orders, setOrders] = useState([])
-  const { userId, orderId, itemId } = useParams()
+const Cart = ({user}) => {
+  const [cart, setCart] = useState([])
+  const [total, setTotal] = useState(0)
+  const  userId  = user?.id
 
   useEffect(() => {
-    const fetchUserOrders = async () => {
+    const fetchOrders = async () => {
       try {
-        const response = await Client.get(`/orders/${userId}`)
-        setOrders(response.data)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    fetchUserOrders()
-  }, [userId])
+    const savedCart = await Client.get(`/orders/${userId}`)
+    setCart(savedCart)
+    calculateTotal(savedCart) } 
+    catch (error) {
+      throw error
+    }}
+    fetchOrders()
 
-  const handleRemoveItem = async () => {
-    try {
-      await Client.delete(`/orders/${orderId}/items/${itemId}`)
-      const updatedOrders = orders.map((order) => {
-        if (order._id === orderId) {
-          return {
-            ...order,
-            items: order.items.filter((item) => item._id !== itemId)
-          }
+  }, [])
+  console.log("userId"+userId);
+  console.log(cart);
+
+
+  const calculateTotal = (cartItems) => {
+    const totalAmount = cartItems.reduce((acc, item) => {
+      return acc + item.price * item.quantity
+    }, 0)
+    setTotal(totalAmount.toFixed(2))
+  }
+
+  const handleRemoveItem = (orderId, itemId) => {
+    const updatedCart = cart.map((order) => {
+      if (order._id === orderId) {
+        return {
+          ...order,
+          items: order.items.filter((item) => item._id !== itemId)
         }
-        return order
-      })
-      setOrders(updatedOrders)
-    } catch (error) {
-      console.error(error)
-    }
+      }
+      return order
+    })
+    setCart(updatedCart)
+    calculateTotal(updatedCart)
+    localStorage.setItem('cart', JSON.stringify(updatedCart))
   }
 
   return (
-    <div>
-      {orders.map((order) => (
-        <CartCard
-          key={order._id}
-          order={order}
-          onRemoveItem={handleRemoveItem}
-        />
-      ))}
+    <div className="cart-page">
+      <h1>Cart</h1>
+      {cart.length === 0 ? (
+        <p>Your cart is empty.</p>
+      ) : (
+        <>
+          <div className="cart-container">
+            {cart.map((cartt) => (
+              <CartCard
+                key={cartt._id}
+                order={cart}
+                onRemoveItem={handleRemoveItem}
+              />
+            ))}
+          </div>
+          <div className="cart-total">
+            <h3>Total: {total} BD</h3>
+            <button className="checkout-button">Proceed to Checkout</button>
+          </div>
+        </>
+      )}
     </div>
   )
 }
 
-export default CartPage
+export default Cart

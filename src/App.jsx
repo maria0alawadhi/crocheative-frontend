@@ -17,7 +17,6 @@ const App = () => {
   const role = localStorage.getItem('role')
   const [categories, setCategories] = useState([])
 
-
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -52,12 +51,15 @@ const App = () => {
       <Header user={user} handleLogOut={handleLogOut} />
       <main>
         <Routes>
-          <Route path="/" element={<Home categories={categories} role={role} />} />
+          <Route
+            path="/"
+            element={<Home categories={categories} role={role} />}
+          />
           <Route path="/:categoryName/items" element={<Items />} />
           <Route path="/signin" element={<SignIn setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/AboutUs" element={<AboutUs />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/orders/:userId" element={<Cart user={user} />} />
         </Routes>
       </main>
     </div>
