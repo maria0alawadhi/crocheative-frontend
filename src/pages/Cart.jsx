@@ -3,20 +3,20 @@ import CartCard from '../components/CartCard'
 import Client from '../services/api'
 const Cart = ({ user }) => {
   const [orders, setOrders] = useState([])
-  const [isLoading, setIsLoading] = useState(false) // Track loading state
-  const [error, setError] = useState(null) // Track any errors
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null) 
   useEffect(() => {
     const fetchOrders = async () => {
-      setIsLoading(true) // Set loading state to true
-      setError(null) // Clear any previous errors
+      setIsLoading(true) 
+      setError(null) 
       try {
-        const response = await Client.get(`/orders/${user?.id}`) // Use optional chaining
+        const response = await Client.get(`/orders/${user?.id}`) 
         setOrders(response.data)
       } catch (error) {
         console.error('Error fetching orders:', error)
-        setError(error) // Store error for potential display
+        setError(error) 
       } finally {
-        setIsLoading(false) // Set loading state to false after fetching (success or error)
+        setIsLoading(false) 
       }
     }
     if (user) {
