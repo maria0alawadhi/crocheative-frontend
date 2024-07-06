@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { CheckSession } from './services/Auth'
-import axios from 'axios'
 import './App.css'
-import { BASE_URL } from './services/api'
 import Register from './pages/Register'
 import SignIn from './pages/SignIn'
 import Home from './pages/Home'
@@ -17,21 +15,6 @@ import Header from './components/Header'
 
 const App = () => {
   const [user, setUser] = useState(null)
-  const role = localStorage.getItem('role')
-  const [categories, setCategories] = useState([])
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await axios.get(`${BASE_URL}/categories`)
-        setCategories(response.data)
-      } catch (error) {
-        throw error
-      }
-    }
-    fetchCategories()
-  }, [])
-
   const checkToken = async () => {
     const user = await CheckSession()
     setUser(user)
@@ -54,18 +37,15 @@ const App = () => {
       <Header user={user} handleLogOut={handleLogOut} />
       <main>
         <Routes>
-          <Route
-            path="/"
-            element={<Home categories={categories} role={role} />}
-          />
+          <Route path="/" element={<Home />} />
           <Route path="/:categoryName/items" element={<Items />} />
-          <Route path="/itemDetails" element={<ItemDetails />} />
+          <Route path="/:categoryName/items/:itemId" element={<ItemDetails user={user} />} />
           <Route path="/AddItemForm" element={<AddItemForm />} />
           <Route path="/EditItemForm" element={<EditItemForm />} />
           <Route path="/signin" element={<SignIn setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/AboutUs" element={<AboutUs />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart" element={<Cart user={user} />} />
         </Routes>
       </main>
     </div>

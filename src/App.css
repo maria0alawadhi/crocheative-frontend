@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+
 body {
   margin: 0;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -133,14 +136,111 @@ button:disabled {
 }
 
 .item-card {
-  border:pink solid 3px;
-  width: 30%;
+  width: 25%;
   margin: 1%;
   padding: 2% 1%;
-  color:rgb(172, 5, 33);
+  color: rgb(172, 5, 33);
+  border: 1px solid #ec9b9b;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 0 13px rgba(194, 107, 107, 0.712);
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  width: 100px;
+  height: 100px;
 }
 
 
+
+/* itemInfo page style */
+
+.item-info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 2%;
+  border: 1px solid #ddd;
+  padding: 2rem;
+}
+
+.main-image img {
+  width: 50%;
+  height: 50%;
+}
+
+.img-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.small-images {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.item-details {
+
+  margin: auto 0;
+  text-align: left;
+  flex-grow: 1;
+  font-size: 1.2rem;
+}
+
+.small-images img {
+  width: 10%;
+  height: 10%;
+  cursor: pointer;
+  margin: 0 0.5rem;
+  
+}
+
+.item-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  margin-top: 1rem;
+}
+
+.small-images img.active {
+  border: 2px solid rgb(255, 0, 85);
+}
+
+.item-details button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  margin: 4px 2px;
+  border-radius: 4px;
+}
+
+.item-details button.edit-item {
+  background-color: #2196F3;
+}
+
+.item-details button.delete-item {
+  background-color: #f44336;
+}
+
+.item-details button:hover {
+  opacity: 0.8;
+}
+
 .title{
-  color:rgb(85, 81, 81);
+  color:#333333d8;
+  font-family: 'Bree Serif';
+  font-style: normal;
+  font-weight: 400;
 }

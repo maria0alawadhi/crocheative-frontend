@@ -3,6 +3,7 @@ import axios from 'axios'
 import { BASE_URL } from '../services/api'
 import ItemCard from '../components/ItemCard'
 import { useParams } from 'react-router'
+import { Link } from 'react-router-dom'
 
 const Items = () => {
   const [items, setItems] = useState([])
@@ -20,13 +21,13 @@ const Items = () => {
     fetchItems()
   }, [])
   return (
-    <div>
+    <div className="item-container">
       <h2 className="title">{categoryName}</h2>
 
       {items.map((item, index) => (
-        <div key={index}>
+        <Link to={`/${categoryName}/items/${item._id}`} key={index} className="item-card-link">
           <ItemCard item={item} />
-        </div>
+        </Link>
       ))}
     </div>
   )
