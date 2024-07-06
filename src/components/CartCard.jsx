@@ -24,6 +24,46 @@ const CartCard = ({ orders, onUpdateQuantity, onRemoveItem }) => {
     }
   }
 
+  //   const handleRemoveItem = (orderId, itemId) => {
+  //     onRemoveItem(orderId, itemId)
+  //   }
+
+  //   const handleQuantityChange = (orderId, itemId, quantity) => {
+  //     handleUpdateQuantity(orderId, itemId, quantity)
+  //   }
+
+  //   return (
+  //     <div>
+  //       {orders.map((order) => (
+  //         <div key={order._id}>
+  //           {order.items.map((item) => (
+  //             <div key={item._id} className="cart-card">
+  //               <img src={item.imgs[0]} alt={item.name} />
+  //               <span>{item.name}</span>
+  //               <span> - Price: {item.price} BD</span>
+  //               {/* <span> Quantity: {item.quantity} </span> */}
+  //               {/* <input
+  //                 type="number"
+  //                 value={item.quantity}
+  //                 onChange={(e) =>
+  //                   handleQuantityChange(order._id, item._id, e.target.value)
+  //                 }
+  //               /> */}
+  //               <button
+  //                 className="cartBtn"
+  //                 onClick={() => handleRemoveItem(order._id, item._id)}
+  //               >
+  //                 Remove
+  //               </button>
+  //             </div>
+  //           ))}
+  //         </div>
+  //       ))}
+  //     </div>
+  //   )
+  // }
+
+  // export default CartCard
   const handleRemoveItem = (orderId, itemId) => {
     onRemoveItem(orderId, itemId)
   }
@@ -31,33 +71,48 @@ const CartCard = ({ orders, onUpdateQuantity, onRemoveItem }) => {
   const handleQuantityChange = (orderId, itemId, quantity) => {
     handleUpdateQuantity(orderId, itemId, quantity)
   }
+  const groupByProduct = (orders) => {
+    const groupedProducts = {}
+
+    orders.forEach((order) => {
+      order.items.forEach((item) => {
+        const key = `${item._id}-${item.name}`
+        if (!groupedProducts[key]) {
+          groupedProducts[key] = {
+            _id: item._id,
+            name: item.name,
+            price: item.price,
+            imgs: item.imgs,
+            quantity: 0,
+            orderId: order._id
+          }
+        }
+        groupedProducts[key].quantity +=
+          typeof item.quantity === 'number' ? item.quantity : 1
+      })
+    })
+
+    return Object.values(groupedProducts)
+  }
+  const groupedProducts = groupByProduct(orders)
 
   return (
     <div>
-      {orders.map((order) => (
-        <div key={order._id}>
-          {order.items.map((item) => (
-            <div key={item._id} className="cart-card">
-              <img src={item.imgs[0]} alt={item.name} />
-              <span>{item.name} </span>
-              <span> Price: {item.price} BD</span>
-              <span> Quantity: {item.quantity} </span>
-              <input
-                type="number"
-                value={item.quantity}
-                onChange={(e) =>
-                  handleQuantityChange(order._id, item._id, e.target.value)
-                }
-              />
-              <button onClick={() => handleRemoveItem(order._id, item._id)}>
-                Remove
-              </button>
-            </div>
-          ))}
+      {groupedProducts.map((product) => (
+        <div key={product._id} className="cart-card">
+          <img src={product.imgs[0]} alt={product.name} />
+          <span>{product.name}</span>
+          <span> - Price: {product.price} BD</span>
+          <span> - Quantity: {product.quantity} </span>
+          <button
+            className="cartBtn"
+            onClick={() => handleRemoveItem(product.orderId, product._id)}
+          >
+            Remove
+          </button>
         </div>
       ))}
     </div>
   )
 }
-
 export default CartCard

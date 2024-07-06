@@ -39,7 +39,7 @@ const Cart = ({ user }) => {
           const itemQuantity =
             typeof item.quantity === 'number' ? item.quantity : 1
           return itemAcc + itemPrice * itemQuantity
-        }, 0)
+        },0)
       )
     }, 0)
     setTotal(total.toFixed(2))
