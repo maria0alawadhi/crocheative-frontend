@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import Client from '../services/api'
+import { Link } from 'react-router-dom'
+
 
 const ItemInfo = ({ item, user }) => {
-  console.log('item:', JSON.stringify(item, null, 2))
   const [selectedImage, setSelectedImage] = useState(0)
   const [orders, setOrders] = useState([])
 
@@ -18,10 +19,9 @@ const ItemInfo = ({ item, user }) => {
     try {
       const response = await Client.post('/orders', {
         user: user.id,
-        items: [item.id]
+        items: [item._id]
       })
       setOrders([...orders, response.data])
-      console.log('ordersssssss=>', orders)
     } catch (error) {
       throw error
     }
@@ -53,11 +53,13 @@ const ItemInfo = ({ item, user }) => {
             Add to Cart
           </button>
         )}
+
         {user && user.role === 'admin' && (
-          <>
-            <button className="edit-item">Edit Item</button>
-            <button className="delete-item">Delete Item</button>
-          </>
+          <Link to="/AllItems">
+          <button>
+            Back to All items
+          </button>
+          </Link>
         )}
       </div>
     </div>

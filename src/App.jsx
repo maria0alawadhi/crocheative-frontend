@@ -9,6 +9,7 @@ import Items from './pages/Items'
 import AboutUs from './pages/AboutUs'
 import ItemDetails from './pages/ItemDetails'
 import AddItemForm from './pages/AddItemForm'
+import AllItems from './pages/AllItems'
 import EditItemForm from './pages/EditItemForm'
 import Cart from './pages/Cart'
 import Header from './components/Header'
@@ -41,7 +42,8 @@ const App = () => {
           <Route path="/:categoryName/items" element={<Items />} />
           <Route path="/:categoryName/items/:itemId" element={<ItemDetails user={user} />} />
           <Route path="/AddItemForm" element={<AddItemForm />} />
-          <Route path="/EditItemForm" element={<EditItemForm />} />
+          <Route path="/AllItems" element={<AllItems />} />
+          <Route path="/edit/:itemId" element={<EditItemForm />} />
           <Route path="/signin" element={<SignIn setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/AboutUs" element={<AboutUs />} />
