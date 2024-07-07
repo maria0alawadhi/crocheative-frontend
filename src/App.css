@@ -3,6 +3,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
 
+
+
 body {
   margin: 0;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -123,6 +125,14 @@ button:disabled {
 }
 
 /* ========================================= */
+.head {
+  background-color: #333;
+  /* position: fixed; */
+  top: -50px;
+  width: 100%;
+  display: block;
+  transition: top 0.3s;
+}
 
 .category-card {
   background-color: #3d323280;
@@ -134,7 +144,30 @@ button:disabled {
   width: 25%;
   display: inline-block;
 }
+/* Swiper Slide */
+.swiper {
+  width: 100%;
+  height: 100%;
+}
 
+/* .swiper-slide {
+  text-align: center;
+  font-size: 26px;
+  background: #fff;
+
+ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+/* .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} */
+/*  */
 .item-card {
   width: 25%;
   margin: 1%;

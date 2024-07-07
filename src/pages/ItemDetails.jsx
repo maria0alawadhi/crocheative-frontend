@@ -1,23 +1,60 @@
+// import axios from 'axios'
+// import React, { useState, useEffect } from 'react'
+// import { useParams } from 'react-router'
+// axios
+// import { BASE_URL } from '../services/api'
+// import ItemInfo from '../components/ItemInfo'
+
+// const ItemDetails = ({user}) => {
+//   const [item, setItem] = useState("")
+//   const { itemId, categoryName } = useParams()
+
+//   useEffect(() => {
+//     const getItem = async () => {
+//       try {
+//         const response = await axios.get(
+//           `${BASE_URL}/${categoryName}/items/${itemId}`
+//         )
+//         setItem(response.data)
+//       } catch (error) {
+//         throw error
+//       }
+//     }
+//     getItem()
+//   }, [])
+
+//   return (
+//     <div>
+//       <ItemInfo item={item} user={user} />
+//     </div>
+//   )
+// }
+
+// export default ItemDetails
+// ItemDetails.js
+// ItemDetails.js
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
-axios
 import { BASE_URL } from '../services/api'
 import ItemInfo from '../components/ItemInfo'
 
-const ItemDetails = ({user}) => {
-  const [item, setItem] = useState("")
+const ItemDetails = ({ user }) => {
+  const [item, setItem] = useState({ reviews: [] })
   const { itemId, categoryName } = useParams()
-
-
 
   useEffect(() => {
     const getItem = async () => {
       try {
-        const response = await axios.get(
+        const itemResponse = await axios.get(
           `${BASE_URL}/${categoryName}/items/${itemId}`
         )
-        setItem(response.data)
+        setItem(itemResponse.data)
+
+        const reviewsResponse = await axios.get(
+          `${BASE_URL}/${categoryName}/items/${itemId}/reviews`
+        )
+        setItem((prevItem) => ({ ...prevItem, reviews: reviewsResponse.data }))
       } catch (error) {
         throw error
       }
@@ -27,7 +64,7 @@ const ItemDetails = ({user}) => {
 
   return (
     <div>
-      <ItemInfo item={item} user={user} />
+      <ItemInfo item={item} user={user} itemId={itemId} />
     </div>
   )
 }
