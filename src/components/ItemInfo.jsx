@@ -1,11 +1,36 @@
 import React, { useState } from 'react'
+import { useParams } from 'react-router'
 import Client from '../services/api'
+import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
-
-const ItemInfo = ({ item, user }) => {
+const ItemInfo = ({ item, user, itemId }) => {
   const [selectedImage, setSelectedImage] = useState(0)
   const [orders, setOrders] = useState([])
+
+  // const [review, setReview] = useState({
+  //   review: '',
+  //   user: user?.id || null,
+  //   items: [itemId]
+  // })
+  // const handleChange = (event) => {
+  //   setReview({ ...review, [event.target.name]: event.target.value })
+  // }
+
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault()
+  //   try {
+  //     await Client.post(`/reviews/${itemId}`, {
+  //       review: review.review,
+  //       user: user?.id,
+  //       items: [itemId]
+  //     })
+  //     setReview({ review: '', user: user?.id, item: itemId })
+  //     setShowModal(true)
+  //   } catch (err) {
+  //     console.error(err)
+  //   }
+  // }
 
   if (!item || !item.imgs || item.imgs.length === 0) {
     return <div>No image available.</div>
@@ -53,12 +78,34 @@ const ItemInfo = ({ item, user }) => {
             Add to Cart
           </button>
         )}
-
+        {/* <div className="review">
+          <form onSubmit={handleSubmit}>
+            {/* <input type="hidden" name="item" value={review.item} disabled />
+            <input type="hidden" name="user" value={review.user} disabled /> */}
+            {/* <label htmlFor="review">
+              <h1>Review</h1>
+            </label>
+            <textarea
+              name="review"
+              value={review.review}
+              onChange={handleChange}
+            />
+            <button type="submit">Submit Review</button>
+          </form>
+          {showModal && (
+            <>
+              <div className="modal-overlay" onClick={closeModal}></div>
+              <div className="modal">
+                <h3>Success</h3>
+                <p>Reservation Reviewed successfully!</p>
+                <button onClick={closeModal}>OK</button>
+              </div>
+            </>
+          )}
+        </div> */} 
         {user && user.role === 'admin' && (
           <Link to="/AllItems">
-          <button>
-            Back to All items
-          </button>
+            <button>Back to All items</button>
           </Link>
         )}
       </div>
