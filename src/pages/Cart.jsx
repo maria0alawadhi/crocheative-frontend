@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import CartCard from '../components/CartCard'
-import Client, { BASE_URL } from '../services/api'
-import { loadStripe } from '@stripe/stripe-js'
+import Client from '../services/api'
+import { useNavigate } from 'react-router'
 
 const Cart = ({ user }) => {
   const [orders, setOrders] = useState([])
@@ -9,6 +9,7 @@ const Cart = ({ user }) => {
   const [error, setError] = useState(null)
   const [total, setTotal] = useState(0)
 
+  const navigate = useNavigate()
   useEffect(() => {
     const fetchOrders = async () => {
       setIsLoading(true)
@@ -72,28 +73,6 @@ const Cart = ({ user }) => {
     }
   }
 
-  const makePayment = async () => {
-    const stripe = await loadStripe(
-      'pk_test_51PZnn0RxRknvYHwQD93s1k5Fc583fxOC8yGzGJqhPynJ1Cpfh8ZhzPTvPZTcaom0E3yrchbz5uRAlsZBEQ2R7c7800DUoHtt3F'
-    )
-    const body = {
-      items: orders
-    }
-    const headers = {
-      'Content-Type': 'application/json'
-    }
-    const response = await fetch(`${BASE_URL}/create-checkout-session`, {
-      mthod: 'POST',
-      headers: headers,
-      body: JSON.stringify(body)
-    })
-    const session = await response.json()
-    const result = stripe.redirectToCheckout({ sessionId: session.id })
-
-    if (result.error) {
-      console.log(result.error)
-    }
-  }
   console.log(orders)
   return (
     <div>
@@ -110,9 +89,9 @@ const Cart = ({ user }) => {
                 onUpdateQuantity={handleUpdateQuantity}
                 onRemoveItem={handleRemoveItem}
               />
-              <div class="payment-card">
+              <div className="payment-card">
                 <p>Total: {total} BD</p>
-                <button onClick={makePayment}>Pay</button>
+                <button onClick={() => navigate('/payment')}>Pay Now</button>
               </div>
             </>
           ) : (
