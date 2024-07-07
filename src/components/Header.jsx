@@ -8,7 +8,7 @@ const Header = ({ user, handleLogOut }) => {
       <nav>
         <div className="head">
           <Link to="/">Home</Link>
-          <Link to="/">Category</Link>
+          <Link to="/">Categories</Link>
           <Link to="/AboutUs">About Us</Link>
           <Link to="/cart">My Cart</Link>
           <Link onClick={handleLogOut} to="/">
@@ -25,8 +25,8 @@ const Header = ({ user, handleLogOut }) => {
       <nav>
         <div className="head">
           <Link to="/">Home</Link>
-          <Link to="/">Category</Link>
-          <Link to="/addItem">Add Item</Link>
+          <Link to="/">Categories</Link>
+          <Link to="/AllItems">Manage Items</Link>
           <Link onClick={handleLogOut} to="/">
             Sign Out
           </Link>
@@ -41,7 +41,7 @@ const Header = ({ user, handleLogOut }) => {
   const publicOptions = (
     <nav>
       <Link to="/">Home</Link>
-      <Link to="/">Category</Link>
+      <Link to="/">Categories</Link>
       <Link to="/AboutUs">About Us</Link>
       <Link to="/register">Register</Link>
       <Link to="/signin">Sign In</Link>
