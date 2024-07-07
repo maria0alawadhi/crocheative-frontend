@@ -1,76 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const CartCard = ({ orders, onUpdateQuantity, onRemoveItem }) => {
-  const handleUpdateQuantity = async (orderId, itemId, quantity) => {
-    try {
-      const orderIndex = orders.findIndex((o) => o._id === orderId)
-      const itemIndex = orders[orderIndex]?.items.findIndex(
-        (i) => i._id === itemId
-      )
+const CartCard = ({ orders, onRemoveItem, onAddItem }) => {
+  const [showConfirmation, setShowConfirmation] = useState(false)
+  const [itemToRemove, setItemToRemove] = useState(null)
+  const [updatedOrders, setUpdatedOrders] = useState(orders)
 
-      if (itemIndex !== undefined) {
-        orders[orderIndex].items[itemIndex].quantity = quantity
-        onUpdateQuantity([...orders])
-      } else {
-        const updatedOrder = await Client.post(`/orders/${orderId}/items`, {
-          itemId,
-          quantity
-        })
-        const updatedCart = [...orders, updatedOrder.data]
-        onUpdateQuantity(updatedCart)
-      }
-    } catch (error) {
-      console.error('Error updating quantity:', error)
-    }
-  }
-
-  //   const handleRemoveItem = (orderId, itemId) => {
-  //     onRemoveItem(orderId, itemId)
-  //   }
-
-  //   const handleQuantityChange = (orderId, itemId, quantity) => {
-  //     handleUpdateQuantity(orderId, itemId, quantity)
-  //   }
-
-  //   return (
-  //     <div>
-  //       {orders.map((order) => (
-  //         <div key={order._id}>
-  //           {order.items.map((item) => (
-  //             <div key={item._id} className="cart-card">
-  //               <img src={item.imgs[0]} alt={item.name} />
-  //               <span>{item.name}</span>
-  //               <span> - Price: {item.price} BD</span>
-  //               {/* <span> Quantity: {item.quantity} </span> */}
-  //               {/* <input
-  //                 type="number"
-  //                 value={item.quantity}
-  //                 onChange={(e) =>
-  //                   handleQuantityChange(order._id, item._id, e.target.value)
-  //                 }
-  //               /> */}
-  //               <button
-  //                 className="cartBtn"
-  //                 onClick={() => handleRemoveItem(order._id, item._id)}
-  //               >
-  //                 Remove
-  //               </button>
-  //             </div>
-  //           ))}
-  //         </div>
-  //       ))}
-  //     </div>
-  //   )
-  // }
-
-  // export default CartCard
-  const handleRemoveItem = (orderId, itemId) => {
-    onRemoveItem(orderId, itemId)
-  }
-
-  const handleQuantityChange = (orderId, itemId, quantity) => {
-    handleUpdateQuantity(orderId, itemId, quantity)
-  }
   const groupByProduct = (orders) => {
     const groupedProducts = {}
 
@@ -94,8 +28,37 @@ const CartCard = ({ orders, onUpdateQuantity, onRemoveItem }) => {
 
     return Object.values(groupedProducts)
   }
-  const groupedProducts = groupByProduct(orders)
 
+  const groupedProducts = groupByProduct(updatedOrders)
+
+  const handleAddItem = (orderId, item) => {
+    onAddItem(orderId, item)
+  }
+  const handleRemoveItem = (orderId, itemId) => {
+    setItemToRemove({ orderId, itemId })
+    setShowConfirmation(true)
+  }
+
+  const confirmRemove = () => {
+    const updatedOrderItems = updatedOrders.map((order) => {
+      if (order._id === itemToRemove.orderId) {
+        return {
+          ...order,
+          items: order.items.filter((item) => item._id !== itemToRemove.itemId)
+        }
+      }
+      return order
+    })
+    setUpdatedOrders(updatedOrderItems)
+    onRemoveItem(itemToRemove.orderId, itemToRemove.itemId)
+    setShowConfirmation(false)
+    setItemToRemove(null)
+  }
+
+  const cancelRemove = () => {
+    setShowConfirmation(false)
+    setItemToRemove(null)
+  }
   return (
     <div>
       {groupedProducts.map((product) => (
@@ -112,7 +75,19 @@ const CartCard = ({ orders, onUpdateQuantity, onRemoveItem }) => {
           </button>
         </div>
       ))}
+      {showConfirmation && (
+        <div className="confirmation-overlay">
+          <div className="confirmation-modal">
+            <h3>Are you sure you want to remove this item?</h3>
+            <div>
+              <button onClick={confirmRemove}>Yes, remove it</button>
+              <button onClick={cancelRemove}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
+
 export default CartCard

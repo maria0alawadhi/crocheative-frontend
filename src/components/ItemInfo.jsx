@@ -18,7 +18,7 @@ const ItemInfo = ({ item, user }) => {
     try {
       const response = await Client.post('/orders', {
         user: user.id,
-        items: [item.id]
+        items: [item._id]
       })
       setOrders([...orders, response.data])
       console.log('ordersssssss=>', orders)
