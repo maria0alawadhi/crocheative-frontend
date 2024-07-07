@@ -12,7 +12,6 @@ const Cart = ({ user }) => {
     const fetchOrders = async () => {
       setIsLoading(true)
       setError(null)
-
       try {
         const response = await Client.get(`/orders/${user?.id}`)
         setOrders(response.data)
@@ -24,7 +23,6 @@ const Cart = ({ user }) => {
         setIsLoading(false)
       }
     }
-
     if (user) {
       fetchOrders()
     }
@@ -39,7 +37,7 @@ const Cart = ({ user }) => {
           const itemQuantity =
             typeof item.quantity === 'number' ? item.quantity : 1
           return itemAcc + itemPrice * itemQuantity
-        },0)
+        }, 0)
       )
     }, 0)
     setTotal(total.toFixed(2))
@@ -57,7 +55,17 @@ const Cart = ({ user }) => {
   const handleRemoveItem = async (orderId, itemId) => {
     try {
       await Client.delete(`/orders/${orderId}/items/${itemId}`)
-      calculateTotal(orders)
+      const updatedOrders = orders.map((order) => {
+        if (order._id === orderId) {
+          return {
+            ...order,
+            items: order.items.filter((item) => item._id !== itemId)
+          }
+        }
+        return order
+      })
+      setOrders(updatedOrders)
+      calculateTotal(updatedOrders)
     } catch (error) {
       console.error('Error removing item:', error)
     }
@@ -71,16 +79,21 @@ const Cart = ({ user }) => {
         <p>Error fetching cart: {error.message}</p>
       ) : (
         <div>
-          <CartCard
-            orders={orders}
-            onUpdateQuantity={handleUpdateQuantity}
-            onRemoveItem={handleRemoveItem}
-          />
-          <p>Total: {total} BD</p>
+          {orders?.length > 0 ? (
+            <>
+              <CartCard
+                orders={orders}
+                onUpdateQuantity={handleUpdateQuantity}
+                onRemoveItem={handleRemoveItem}
+              />
+              <p>Total: {total} BD</p>
+            </>
+          ) : (
+            <p>Your cart is empty.</p>
+          )}
         </div>
       )}
     </div>
   )
 }
-
 export default Cart
