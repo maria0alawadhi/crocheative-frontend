@@ -13,9 +13,11 @@ import AllItems from './pages/AllItems'
 import EditItemForm from './pages/EditItemForm'
 import Cart from './pages/Cart'
 import Header from './components/Header'
+import Payment from './pages/Payment'
 
 const App = () => {
   const [user, setUser] = useState(null)
+
   const checkToken = async () => {
     const user = await CheckSession()
     setUser(user)
@@ -40,13 +42,17 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/:categoryName/items" element={<Items />} />
-          <Route path="/:categoryName/items/:itemId" element={<ItemDetails user={user} />} />
+          <Route
+            path="/:categoryName/items/:itemId"
+            element={<ItemDetails user={user} />}
+          />
           <Route path="/AddItemForm" element={<AddItemForm />} />
           <Route path="/AllItems" element={<AllItems />} />
           <Route path="/edit/:itemId" element={<EditItemForm />} />
           <Route path="/signin" element={<SignIn setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/AboutUs" element={<AboutUs />} />
+          <Route path="/payment" element={<Payment user={user} />} />
           <Route path="/cart" element={<Cart user={user} />} />
         </Routes>
       </main>

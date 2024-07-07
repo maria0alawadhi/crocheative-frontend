@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import CartCard from '../components/CartCard'
 import Client from '../services/api'
+import { useNavigate } from 'react-router'
 
 const Cart = ({ user }) => {
   const [orders, setOrders] = useState([])
@@ -8,6 +9,7 @@ const Cart = ({ user }) => {
   const [error, setError] = useState(null)
   const [total, setTotal] = useState(0)
 
+  const navigate = useNavigate()
   useEffect(() => {
     const fetchOrders = async () => {
       setIsLoading(true)
@@ -71,6 +73,7 @@ const Cart = ({ user }) => {
     }
   }
 
+  console.log(orders)
   return (
     <div>
       {isLoading ? (
@@ -86,7 +89,10 @@ const Cart = ({ user }) => {
                 onUpdateQuantity={handleUpdateQuantity}
                 onRemoveItem={handleRemoveItem}
               />
-              <p>Total: {total} BD</p>
+              <div className="payment-card">
+                <p>Total: {total} BD</p>
+                <button onClick={() => navigate('/payment')}>Pay Now</button>
+              </div>
             </>
           ) : (
             <p>Your cart is empty.</p>
