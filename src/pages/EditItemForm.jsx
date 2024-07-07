@@ -1,45 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import Client from '../services/api';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import Client from '../services/api'
+import { useParams, useNavigate } from 'react-router-dom'
 
 const EditItemForm = () => {
-    const [item, setItem] = useState(null);
-    const { itemId } = useParams();
-    const navigate = useNavigate();
-  
-    useEffect(() => {
-      const fetchItem = async () => {
-        try {
-          const response = await Client.get(`/items/${itemId}`);
-          setItem({ ...response.data, imgs: response.data.imgs || [] });
-        } catch (error) {
-          console.error('Error fetching item:', error);
-        }
-      };
-      fetchItem();
-    }, [itemId]);
-  
-    const handleInputChange = (e) => {
-      setItem({ ...item, [e.target.name]: e.target.value });
-    };
-  
-    const handleImgChange = (e) => {
-      setItem({ ...item, imgs: [...item.imgs, e.target.value] });
-    };
-  
-    const handleUpdateItem = async () => {
+  const [item, setItem] = useState(null)
+  const { itemId } = useParams()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const fetchItem = async () => {
       try {
-        await Client.put(`/items/${itemId}`, item);
-        navigate('/AllItems');
+        const response = await Client.get(`/items/${itemId}`)
+        setItem({ ...response.data, imgs: response.data.imgs || [] })
       } catch (error) {
-        console.error('Error updating item:', error);
+        console.error('Error fetching item:', error)
       }
-    };
-  
-    if (!item) {
-      return <div>Loading...</div>;
     }
-  
+    fetchItem()
+  }, [itemId])
+
+  const handleInputChange = (e) => {
+    setItem({ ...item, [e.target.name]: e.target.value })
+  }
+
+  const handleImgChange = (e) => {
+    setItem({ ...item, imgs: [...item.imgs, e.target.value] })
+  }
+
+  const handleUpdateItem = async () => {
+    try {
+      await Client.put(`/items/${itemId}`, item)
+      navigate('/AllItems')
+    } catch (error) {
+      console.error('Error updating item:', error)
+    }
+  }
+
+  if (!item) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div>
       <h2 className="title">Edit Item</h2>
@@ -102,7 +102,7 @@ const EditItemForm = () => {
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default EditItemForm;
+export default EditItemForm
