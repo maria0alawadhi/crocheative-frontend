@@ -6,10 +6,10 @@ import { BASE_URL } from '../services/api'
 import { Link } from 'react-router-dom'
 //
 import { Swiper, SwiperSlide } from 'swiper/react'
-import SwiperCore, { Pagination, Navigation } from 'swiper'
+import { Pagination, Navigation } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import 'swiper/css/navigation'
+import 'swiper/css/free-mode';
 //
 const Home = () => {
   const [categories, setCategories] = useState([])
@@ -32,13 +32,8 @@ const Home = () => {
           <div>
             <h1 className="home-text">Get your unique piece now! </h1>
 
-            {/* <p id="home-text">Choose what's good for you</p> */}
-            {/* <button className="button home-button" onClick={() => navigate('/login')}>
-
-          Get Started
-        </button> */}
           </div>
-          <img src="https://i.imgur.com/duk3b58.jpeg" alt="Home page cover" />
+          <img className="homepage-cover" src="https://i.imgur.com/rLcjbDK.png" alt="Home page cover" />
         </div>
         <h1 className="title">Categories</h1>
         <Swiper

@@ -22,13 +22,13 @@ const SignIn = ({ setUser }) => {
 
   return (
     <div className="container3">
-      <h1 className="register">Sign In</h1>
+      <h1 className="title">Sign In</h1>
       <div className=" wrapper">
         <div className="signin-card">
           <form onSubmit={handleSubmit}>
             <div className="input-wrapper">
               <label htmlFor="email">Email</label>
-              <input
+              <input id="inputs"
                 onChange={handleChange}
                 name="email"
                 type="email"
@@ -39,7 +39,7 @@ const SignIn = ({ setUser }) => {
             </div>
             <div className="input-wrapper">
               <label htmlFor="password">Password</label>
-              <input
+              <input id="inputs"
                 onChange={handleChange}
                 type="password"
                 name="password"
@@ -47,7 +47,7 @@ const SignIn = ({ setUser }) => {
                 required
               />
             </div>
-            <button disabled={!formValues.email || !formValues.password}>
+            <button  className='loginBtn' disabled={!formValues.email || !formValues.password}>
               Sign In
             </button>
           </form>
