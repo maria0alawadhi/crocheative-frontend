@@ -39,7 +39,7 @@ const Register = () => {
           <form onSubmit={handleSubmit} className="reg">
             <div className="input-wrapper">
               <label htmlFor="name">Name</label>
-              <input id="inputs"
+              <input
                 onChange={handleChange}
                 name="name"
                 type="text"
@@ -50,7 +50,7 @@ const Register = () => {
             </div>
             <div className="input-wrapper">
               <label htmlFor="email">Email</label>
-              <input id="inputs"
+              <input
                 onChange={handleChange}
                 name="email"
                 type="email"
@@ -62,7 +62,7 @@ const Register = () => {
 
             <div className="input-wrapper">
               <label htmlFor="password">Password</label>
-              <input id="inputs"
+              <input
                 onChange={handleChange}
                 type="password"
                 name="password"
@@ -72,7 +72,7 @@ const Register = () => {
             </div>
             <div className="input-wrapper">
               <label htmlFor="confirmPassword">Confirm Password</label>
-              <input id="inputs"
+              <input
                 onChange={handleChange}
                 type="password"
                 name="confirmPassword"
@@ -82,18 +82,24 @@ const Register = () => {
             </div>
             <div className="input-wrapper">
               <label htmlFor="role">Role</label>
-              <select id="role" 
+              <select
+                id="role"
                 onChange={handleChange}
                 name="role"
                 value={formValues.role}
                 required
               >
                 <option>Select Role</option>
-                <option id="role" value="admin">Admin</option>
-                <option id="role" value="client">Client</option>
+                <option id="role" value="admin">
+                  Admin
+                </option>
+                <option id="role" value="client">
+                  Client
+                </option>
               </select>
             </div>
-            <button className='loginBtn'
+            <button
+              className="loginBtn"
               disabled={
                 !formValues.email ||
                 (!formValues.password &&

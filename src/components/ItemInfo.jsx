@@ -3,17 +3,32 @@ import { useParams } from 'react-router'
 import Client from '../services/api'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
 
 const ItemInfo = ({ item, user, itemId }) => {
   const [selectedImage, setSelectedImage] = useState(0)
   const [orders, setOrders] = useState([])
   const [showModal, setShowModal] = useState(false)
+  const [reviews, setReviews] = useState([])
 
   const [review, setReview] = useState({
     review: '',
     user: user?.id || null,
     items: [itemId]
   })
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await Client.get(`/${itemId}/reviews`)
+        setReviews(response.data)
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    fetchReviews()
+  }, [itemId])
+
   const handleChange = (event) => {
     setReview({ ...review, [event.target.name]: event.target.value })
   }
@@ -21,13 +36,14 @@ const ItemInfo = ({ item, user, itemId }) => {
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
-      await Client.post(`/${itemId}/reviews`, {
+      const response = await Client.post(`/${itemId}/reviews`, {
         review: review.review,
         user: user?.id,
         items: [itemId]
       })
       setReview({ review: '', user: user?.id, item: itemId })
       setShowModal(true)
+      setReviews([...reviews, response.data])
     } catch (err) {
       console.error(err)
     }
@@ -99,12 +115,20 @@ const ItemInfo = ({ item, user, itemId }) => {
               <div className="modal-overlay" onClick={closeModal}></div>
               <div className="modal">
                 <h3>Success</h3>
-                <p>Reservation Reviewed successfully!</p>
+                <p>Review Submitted successfully!</p>
                 <button onClick={closeModal}>OK</button>
               </div>
             </>
           )}
+          <h2>Reviews</h2>
+          {reviews.map((review, index) => (
+            <div key={index} className="review-item">
+              <p> {review.name}</p>
+              <p>{review.review}</p>
+            </div>
+          ))}
         </div>
+
         {user && user.role === 'admin' && (
           <Link to="/AllItems">
             <button>Back to All items</button>
