@@ -7,30 +7,32 @@ import { Link } from 'react-router-dom'
 const ItemInfo = ({ item, user, itemId }) => {
   const [selectedImage, setSelectedImage] = useState(0)
   const [orders, setOrders] = useState([])
+  const [showModal, setShowModal] = useState(false)
 
-  // const [review, setReview] = useState({
-  //   review: '',
-  //   user: user?.id || null,
-  //   items: [itemId]
-  // })
-  // const handleChange = (event) => {
-  //   setReview({ ...review, [event.target.name]: event.target.value })
-  // }
+  const [review, setReview] = useState({
+    review: '',
+    user: user?.id || null,
+    items: [itemId]
+  })
+  const handleChange = (event) => {
+    setReview({ ...review, [event.target.name]: event.target.value })
+  }
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault()
-  //   try {
-  //     await Client.post(`/reviews/${itemId}`, {
-  //       review: review.review,
-  //       user: user?.id,
-  //       items: [itemId]
-  //     })
-  //     setReview({ review: '', user: user?.id, item: itemId })
-  //     setShowModal(true)
-  //   } catch (err) {
-  //     console.error(err)
-  //   }
-  // }
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    try {
+      await Client.post(`/${itemId}/reviews`, {
+        review: review.review,
+        user: user?.id,
+        items: [itemId]
+      })
+      setReview({ review: '', user: user?.id, item: itemId })
+      setShowModal(true)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+  const closeModal = () => setShowModal(false)
 
   if (!item || !item.imgs || item.imgs.length === 0) {
     return <div>No image available.</div>
@@ -78,11 +80,11 @@ const ItemInfo = ({ item, user, itemId }) => {
             Add to Cart
           </button>
         )}
-        {/* <div className="review">
+        <div className="review">
           <form onSubmit={handleSubmit}>
-            {/* <input type="hidden" name="item" value={review.item} disabled />
-            <input type="hidden" name="user" value={review.user} disabled /> */}
-            {/* <label htmlFor="review">
+            <input type="hidden" name="item" value={review.item} disabled />
+            <input type="hidden" name="user" value={review.user} disabled />
+            <label htmlFor="review">
               <h1>Review</h1>
             </label>
             <textarea
@@ -102,7 +104,7 @@ const ItemInfo = ({ item, user, itemId }) => {
               </div>
             </>
           )}
-        </div> */} 
+        </div>
         {user && user.role === 'admin' && (
           <Link to="/AllItems">
             <button>Back to All items</button>
