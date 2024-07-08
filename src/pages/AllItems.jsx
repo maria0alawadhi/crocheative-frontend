@@ -115,7 +115,7 @@ const AllItems = () => {
                 )}
               </td>
               <td>{item.category}</td>
-              <td>{item.price}</td>
+              <td>{item.price} BD</td>
               <td>
                 {isEditing && editingItem?._id === item._id ? null : (
                   <>
@@ -138,8 +138,6 @@ const AllItems = () => {
           ))}
         </tbody>
       </table>
-
-    
 
       {showModal && (
         <>

@@ -299,7 +299,7 @@ img {
   padding: 2rem;
 }
 
-/* admin */
+/* Manage Item Table*/
 
 .items-table {
   width: 80%;
@@ -368,7 +368,7 @@ img {
   z-index: 999;
 }
 
-/* form */
+/* Add item form */
 
 .form {
   max-width: 450px;
@@ -429,4 +429,54 @@ img {
 
 .add-item-btn:hover {
   background-color: #16ac1d;
+}
+
+/* payment */
+
+.payment-form {
+  padding: 7%;
+  border: 1px solid #615f5f;
+  box-shadow: #342e3b 2px 4px 3px 0;
+  border-radius: 5px;
+  margin: 3% auto;
+  max-width: 500px;
+}
+
+.payment-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.card-details,
+.expiry-cvc,
+.cardholder-name,
+.sec-code {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  text-align: left;
+  font-size: large;
+  margin-bottom: 1%;
+}
+
+.card-details input,
+.expiry-cvc input,
+.cardholder-name input,
+.sec-code input {
+  width: 100%;
+  padding: 3%;
+  font-size: large;
+}
+
+::placeholder {
+  color: #999;
+  font-size: large;
+}
+
+.pay-btn {
+  width: 100%;
+  padding: 2%;
+  font-size: large;
 }
