@@ -6,8 +6,15 @@
 /* ========================================= */
 body {
   font-family: 'Open Sans', sans-serif;
+<<<<<<< HEAD
   /* color: #333333d8; */
   background-color: #e6e6ee;
+=======
+  color: #f5e4e4;
+
+  background-color: #FBCFE8;
+
+>>>>>>> 7edc6859d33a562f2782c8bf86e51e2048a38b7d
 }
 
 a {
