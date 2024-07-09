@@ -17,8 +17,8 @@
     "react-modal": "^3.16.1",
     "react-router": "^6.24.0",
     "react-router-dom": "^6.24.0",
-    "styled-components": "^6.1.11"
-    "swiper": "^8.4.5"
+    "styled-components": "^6.1.11",
+    "swiper": "^8.4.7"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
