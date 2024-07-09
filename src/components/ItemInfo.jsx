@@ -74,65 +74,69 @@ const ItemInfo = ({ item, user }) => {
     }
   }
   return (
-    <div className="item-info">
-      <div className="img-container">
-        <div className="main-image">
-          <img src={item.imgs[selectedImage]} alt="main" />
+    <div className="iteminfo">
+      <div className="item-info">
+        <div className="img-container">
+          <div className="main-image">
+            <img src={item.imgs[selectedImage]} alt="main" />
+          </div>
+          <div className="small-images">
+            {item.imgs.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt={`${index}`}
+                className={selectedImage === index ? 'active' : ''}
+                onClick={() => setSelectedImage(index)}
+              />
+            ))}
+          </div>
         </div>
-        <div className="small-images">
-          {item.imgs.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt={`${index}`}
-              className={selectedImage === index ? 'active' : ''}
-              onClick={() => setSelectedImage(index)}
-            />
-          ))}
-        </div>
-      </div>
-      <div className="item-details">
-        <p className="item-name">{item.name}</p>
-        <p>Price: {item.price} BD</p>
-        <p className="description">{item.description}</p>
-        {user && user.role === 'client' && (
-          <button className="add-to-cart" onClick={handleAddToCart}>
-            Add to Cart
-          </button>
-        )}
-        <div className="review">
-          <form onSubmit={handleSubmit}>
-            <input type="hidden" name="item" value={review.item} disabled />
-            <input type="hidden" name="user" value={review.user} disabled />
-            <label htmlFor="review">
-              <h1>Review</h1>
-            </label>
-            <textarea
-              name="review"
-              value={review.review}
-              onChange={handleChange}
-            />
-            <button type="submit">Submit Review</button>
-          </form>
-
-
-          {reviews.map((review, index) => (
-            <div key={index} className="review-card">
-              <p className="review-title">{review.user.name}</p>
-              <p>{review.review}</p>
-            </div>
-          ))}
-
-          {showModal && (
-            <>
-              <div className="modal-overlay" onClick={closeModal}></div>
-              <div className="modal">
-                <h3>Success</h3>
-                <p>Review Submitted successfully!</p>
-                <button onClick={closeModal}>OK</button>
-              </div>
-            </>
+        <div className="item-details">
+          <p className="item-name">{item.name}</p>
+          <p>Price: {item.price} BD</p>
+          <p className="description">{item.description}</p>
+          {user && user.role === 'client' && (
+            <button className="add-to-cart" onClick={handleAddToCart}>
+              Add to Cart
+            </button>
           )}
+        </div>
+        </div>
+        <div className="review-info">
+          <div className="review">
+            <form onSubmit={handleSubmit}>
+              <input type="hidden" name="item" value={review.item} disabled />
+              <input type="hidden" name="user" value={review.user} disabled />
+              <label htmlFor="review">
+                <h1>Review</h1>
+              </label>
+              <textarea id='review' 
+                name="review"
+                value={review.review}
+                onChange={handleChange}
+              />
+              <button type="submit">Submit Review</button>
+            </form>
+
+            {reviews.map((review, index) => (
+              <div key={index} className="review-card">
+                <p className="review-title">{review.user.name}</p>
+                <p>{review.review}</p>
+              </div>
+            ))}
+
+            {showModal && (
+              <>
+                <div className="modal-overlay" onClick={closeModal}></div>
+                <div className="modal">
+                  <h3>Success</h3>
+                  <p>Review Submitted successfully!</p>
+                  <button onClick={closeModal}>OK</button>
+                </div>
+              </>
+            )}
+          </div>
           {user && user.role === 'admin' && (
             <Link to="/AllItems">
               <button>Back to All items</button>
@@ -140,7 +144,7 @@ const ItemInfo = ({ item, user }) => {
           )}
         </div>
       </div>
-    </div>
+    
   )
 }
 

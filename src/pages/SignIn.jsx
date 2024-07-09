@@ -21,7 +21,7 @@ const SignIn = ({ setUser }) => {
   }
 
   return (
-    <div className="container3">
+    <div className="login-form">
       <h1 className="title">Sign In</h1>
       <div className=" wrapper">
         <div className="signin-card">
@@ -47,7 +47,7 @@ const SignIn = ({ setUser }) => {
                 required
               />
             </div>
-            <button  className='loginBtn' disabled={!formValues.email || !formValues.password}>
+            <button  className='login-btn' disabled={!formValues.email || !formValues.password}>
               Sign In
             </button>
           </form>

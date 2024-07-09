@@ -33,7 +33,7 @@ const Register = () => {
 
   return (
     <>
-      <div className="container3">
+      <div className="login-form">
         <h1 className="title">Register</h1>
         <div className="register-card centered">
           <form onSubmit={handleSubmit} className="reg">
@@ -99,7 +99,7 @@ const Register = () => {
               </select>
             </div>
             <button
-              className="loginBtn"
+              className="login-btn"
               disabled={
                 !formValues.email ||
                 (!formValues.password &&
