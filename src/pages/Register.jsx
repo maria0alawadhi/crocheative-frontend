@@ -39,7 +39,7 @@ const Register = () => {
           <form onSubmit={handleSubmit} className="reg">
             <div className="input-wrapper">
               <label htmlFor="name">Name</label>
-              <input
+              <input id="inputs"
                 onChange={handleChange}
                 name="name"
                 type="text"
@@ -50,7 +50,7 @@ const Register = () => {
             </div>
             <div className="input-wrapper">
               <label htmlFor="email">Email</label>
-              <input
+              <input id="inputs"
                 onChange={handleChange}
                 name="email"
                 type="email"
@@ -62,7 +62,7 @@ const Register = () => {
 
             <div className="input-wrapper">
               <label htmlFor="password">Password</label>
-              <input
+              <input  id="inputs"
                 onChange={handleChange}
                 type="password"
                 name="password"
@@ -72,7 +72,7 @@ const Register = () => {
             </div>
             <div className="input-wrapper">
               <label htmlFor="confirmPassword">Confirm Password</label>
-              <input
+              <input  id="inputs"
                 onChange={handleChange}
                 type="password"
                 name="confirmPassword"

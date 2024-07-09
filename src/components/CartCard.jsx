@@ -65,8 +65,8 @@ const CartCard = ({ orders, onRemoveItem, onAddItem }) => {
         <div key={product._id} className="cart-card">
           <img src={product.imgs[0]} alt={product.name} />
           <span>{product.name}</span>
-          <span> - Price: {product.price} BD</span>
-          <span> - Quantity: {product.quantity} </span>
+          <span>  Price: {product.price} BD</span>
+          <span>  Quantity: {product.quantity} </span>
           <button
             className="cartBtn"
             onClick={() => handleRemoveItem(product.orderId, product._id)}
