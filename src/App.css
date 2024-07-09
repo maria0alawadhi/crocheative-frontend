@@ -126,11 +126,17 @@ ory-card {
 .about-us {
   color: #333;
   font-family: 'Bree Serif';
+  font-size: 20px;
   border-radius: 8px;
   margin: 2%;
   padding: 5% 2%;
   color: #333;
   display: inline-block;
+}
+.about-us-img{
+  display: block;
+  width: 500px;
+  height: 400px;
 }
 /* Swiper Slide */
 .swiper {
@@ -469,16 +475,6 @@ img {
   z-index: 1000;
   border-radius: 8px;
 }
-
-/* .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-} */
 
 /* Add item form */
 
