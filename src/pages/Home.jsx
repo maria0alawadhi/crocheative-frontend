@@ -9,7 +9,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import 'swiper/css/free-mode';
+import 'swiper/css/free-mode'
 //
 const Home = () => {
   const [categories, setCategories] = useState([])
@@ -31,9 +31,12 @@ const Home = () => {
         <div className="home-guest">
           <div>
             <h1 className="home-text">Get your unique piece now! </h1>
-
           </div>
-          <img className="homepage-cover" src="https://i.imgur.com/rLcjbDK.png" alt="Home page cover" />
+          <img
+            className="homepage-cover"
+            src="https://i.imgur.com/rLcjbDK.png"
+            alt="Home page cover"
+          />
         </div>
         <h1 className="title">Categories</h1>
         <Swiper
@@ -54,11 +57,6 @@ const Home = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-        {/* {categories.map((category) => (
-          <Link to={`/${category}/items`} key={category}>
-            <CategoryCard category={category} />
-          </Link>
-        ))} */}
       </div>
       <div className="about-us-container"></div>
       <div className="contact-us-container"></div>
