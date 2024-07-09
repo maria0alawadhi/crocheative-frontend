@@ -45,9 +45,8 @@ const ItemInfo = ({ item, user }) => {
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
-      await Client.post(`${itemId}/reviews`, review)
-      setReview({ review: '', user: user?.id, item: itemId })
-      console.log(review)
+      const response = await Client.post(`${itemId}/reviews`, review)
+      setReview(response.data)
       setShowModal(true)
     } catch (err) {
       console.error(err)
@@ -102,49 +101,54 @@ const ItemInfo = ({ item, user }) => {
             </button>
           )}
         </div>
-        </div>
-        <div className="review-info">
-          <div className="review">
+      </div>
+      <div className="review-info">
+        <div className="review">
+          {user && user.role === 'client' && (
             <form onSubmit={handleSubmit}>
               <input type="hidden" name="item" value={review.item} disabled />
               <input type="hidden" name="user" value={review.user} disabled />
               <label htmlFor="review">
                 <h1>Review</h1>
               </label>
-              <textarea id='review' 
+              <textarea
+                id="review"
                 name="review"
                 value={review.review}
                 onChange={handleChange}
               />
               <button type="submit">Submit Review</button>
             </form>
+          )}
 
-            {reviews.map((review, index) => (
-              <div key={index} className="review-card">
+          <h1>Reviews</h1>
+          {reviews
+            .filter((review) => review.item === itemId)
+            .map((review, index) => (
+              <div key={index} className="review-info">
                 <p className="review-title">{review.user.name}</p>
                 <p>{review.review}</p>
               </div>
             ))}
 
-            {showModal && (
-              <>
-                <div className="modal-overlay" onClick={closeModal}></div>
-                <div className="modal">
-                  <h3>Success</h3>
-                  <p>Review Submitted successfully!</p>
-                  <button onClick={closeModal}>OK</button>
-                </div>
-              </>
-            )}
-          </div>
-          {user && user.role === 'admin' && (
-            <Link to="/AllItems">
-              <button>Back to All items</button>
-            </Link>
+          {showModal && (
+            <>
+              <div className="modal-overlay" onClick={closeModal}></div>
+              <div className="modal">
+                <h3>Success</h3>
+                <p>Review Submitted successfully!</p>
+                <button onClick={closeModal}>OK</button>
+              </div>
+            </>
           )}
         </div>
+        {user && user.role === 'admin' && (
+          <Link to="/AllItems">
+            <button>Back to All items</button>
+          </Link>
+        )}
       </div>
-    
+    </div>
   )
 }
 

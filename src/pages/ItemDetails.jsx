@@ -1,9 +1,8 @@
-
-import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 import { BASE_URL } from '../services/api'
 import ItemInfo from '../components/ItemInfo'
+import axios from 'axios'
 
 const ItemDetails = ({ user }) => {
   const [item, setItem] = useState(null)
