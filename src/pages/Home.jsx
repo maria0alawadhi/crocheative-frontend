@@ -38,25 +38,29 @@ const Home = () => {
             alt="Home page cover"
           />
         </div>
-        <h1 className="title">Categories</h1>
-        <Swiper
-          slidesPerView={3}
-          spaceBetween={30}
-          pagination={{
-            clickable: true
-          }}
-          navigation={true}
-          modules={[Pagination, Navigation]}
-          className="mySwiper"
-        >
-          {categories.map((category) => (
-            <SwiperSlide key={category}>
-              <Link to={`/${category}/items`}>
-                <CategoryCard category={category} />
-              </Link>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <div id="category">
+          <h1 className="title" href="category">
+            Categories
+          </h1>
+          <Swiper
+            slidesPerView={3}
+            spaceBetween={30}
+            pagination={{
+              clickable: true
+            }}
+            navigation={true}
+            modules={[Pagination, Navigation]}
+            className="mySwiper"
+          >
+            {categories.map((category) => (
+              <SwiperSlide key={category}>
+                <Link to={`/${category}/items`}>
+                  <CategoryCard category={category} />
+                </Link>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
       <div className="about-us-container"></div>
       <div className="contact-us-container"></div>

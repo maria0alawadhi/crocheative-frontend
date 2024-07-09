@@ -106,6 +106,7 @@ const Payment = ({ user }) => {
           <label>Card Number</label>
           <input
             type="text"
+             id="cardholderName"
             value={formData.cardNumber}
             onChange={(e) => setFormValue('cardNumber', e.target.value)}
             placeholder="**** **** **** ****"
@@ -117,7 +118,7 @@ const Payment = ({ user }) => {
             <label htmlFor="expirationDate">Expiration Date</label>
             <input
               type="text"
-              id="expirationDate"
+               id="cardholderName"
               value={formData.expirationDate}
               onChange={(e) => setFormValue('expirationDate', e.target.value)}
               placeholder="MM/YY"
@@ -128,7 +129,7 @@ const Payment = ({ user }) => {
             <label htmlFor="securityCode">Security Code</label>
             <input
               type="text"
-              id="securityCode"
+             id="cardholderName"
               value={formData.securityCode}
               onChange={(e) => setFormValue('securityCode', e.target.value)}
               placeholder="CVV"

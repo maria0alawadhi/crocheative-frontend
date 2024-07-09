@@ -263,7 +263,8 @@ img {
 .item-details button:hover {
   background-color: #a3a7f6;
 }
-.review-info, .review-item {
+.review-info,
+.review-item {
   color: #333;
   font-family: 'Bree Serif';
   font-size: 15px;
@@ -313,23 +314,28 @@ img {
 }
 
 /* Cart page */
-.cart-card, .modal-overlay{
+.cart-card,
+.modal-overlay {
+  
+  color: #333;
+  text-align: center;
+  font-family: 'Bree Serif';
+  font-size: 15px;
   justify-content: space-between;
   display: flex;
   background-color: #f5f5f5;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 16px;
-  text-align: center;
-  box-shadow: 0 0 8px #FC693F;
-  margin: auto;
+  box-shadow: 0 0 8px #fc693f;
+  /* margin: auto 0; */
 }
 #cart-img {
-  box-shadow: 0 0 10px #FC693F;
+  box-shadow: 0 0 10px #fc693f;
 }
-.cart-btn{
+.cart-btn {
   justify-content: space-between;
-  background-color: #FC693F;
+  background-color: #fc693f;
   width: 100px;
   height: 30px;
   border: none;
@@ -337,11 +343,73 @@ img {
   padding: 1px 10px;
   text-align: center;
   border-radius: 4px;
+  margin: auto 0;
 }
 .cart-btn:hover {
   background-color: #fd815f;
 }
-
+.payment-card {
+  color: #333;
+  text-align: center;
+  font-family: 'Bree Serif';
+  font-size: 15px;
+  display: grid;
+  flex-direction: row;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 0 8px #fc693f;
+  margin: 2rem;
+}
+.payment-card button {
+  justify-content: space-between;
+  background-color: #fc693f;
+  height: 30px;
+  border: none;
+  color: white;
+  border-radius: 4px;
+}
+.payment-card button:hover {
+  background-color: #fd815f;
+}
+.payment-form {
+  font-family: 'Bree Serif';
+  width: 50%;
+  margin: 3% 25%;
+  color: #4f8f6e;
+  border: 1px solid #4f8f6e;
+  padding: 20px;
+  box-shadow: 0 0 13px #4f8f6e;
+}
+.pay-btn {
+  font-size: 18px;
+  font-family: 'Bree Serif';
+  color: #4f8f6e;
+  width: 100%;
+  padding: 8px 15px;
+  margin: 8px 0;
+  border: 3px solid #ccc;
+  outline: none;
+}
+.pay-btn:hover {
+  background-color: #7a9788;
+  color: #fff;
+}
+#cardholderName {
+  font-family: 'Bree Serif';
+  font-size: 15px;
+  color: #333;
+  width: 100%;
+  padding: 8px 15px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  outline: none;
+}
+#cardholderName:focus {
+  border: 2px solid #4f8f6e;
+}
 
 /* Manage Item Table*/
 
@@ -402,7 +470,7 @@ img {
   border-radius: 8px;
 }
 
-.modal-overlay {
+/* .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -410,7 +478,7 @@ img {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
-}
+} */
 
 /* Add item form */
 
@@ -475,22 +543,6 @@ img {
   background-color: #d49386;
 }
 
-/* payment */
-
-.payment-form {
-  padding: 7%;
-  border: 1px solid #615f5f;
-  box-shadow: #342e3b 2px 4px 3px 0;
-  border-radius: 5px;
-  margin: 3% auto;
-  max-width: 500px;
-}
-
-.payment-form h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
 .card-details,
 .expiry-cvc,
 .cardholder-name,
@@ -516,11 +568,5 @@ label {
 
 ::placeholder {
   color: #999;
-  font-size: large;
-}
-
-.pay-btn {
-  width: 100%;
-  padding: 2%;
   font-size: large;
 }
