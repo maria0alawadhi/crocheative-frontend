@@ -1,7 +1,6 @@
 import React from 'react'
 
 const ItemCard = ({ item }) => {
-console.log("item"+JSON.stringify(item,null,2))
   return (
     <div className="item-card">
       <img src={item.imgs[0]} />
