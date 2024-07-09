@@ -63,7 +63,7 @@ const CartCard = ({ orders, onRemoveItem, onAddItem }) => {
     <div>
       {groupedProducts.map((product) => (
         <div key={product._id} className="cart-card">
-          <img src={product.imgs[0]} alt={product.name} />
+          <img id='cart-img'src={product.imgs[0]} alt={product.name} />
           <span>{product.name}</span>
           <span> Price: {product.price} BD</span>
           <span> Quantity: {product.quantity} </span>
@@ -79,8 +79,8 @@ const CartCard = ({ orders, onRemoveItem, onAddItem }) => {
         <div className="modal-overlay">
           <div className="modal">
             <h3>Are you sure you want to remove this item?</h3>
-            <button onClick={confirmRemove}>Yes</button>
-            <button onClick={cancelRemove}>Cancel</button>
+            <button className='cart-btn' onClick={confirmRemove}>Yes</button>
+            <button className='cart-btn' onClick={cancelRemove}>Cancel</button>
           </div>
         </div>
       )}
