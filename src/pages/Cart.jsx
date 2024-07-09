@@ -72,8 +72,6 @@ const Cart = ({ user }) => {
       console.error('Error removing item:', error)
     }
   }
-
-  console.log(orders)
   return (
     <div>
       {isLoading ? (

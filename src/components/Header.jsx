@@ -54,15 +54,11 @@ const Header = ({ user, handleLogOut }) => {
           src="https://i.imgur.com/zXkBiD1.png"
         />
       </Link>
-      {user ? (
-        user.role === 'client' ? (
-          <ClientNavigation />
-        ) : (
-          <AdminNavigation />
-        )
-      ) : (
-        <PublicNavigation />
-      )}
+      {user
+        ? user.role === 'client'
+          ? ClientNavigation()
+          : AdminNavigation()
+        : PublicNavigation()}
     </header>
   )
 }

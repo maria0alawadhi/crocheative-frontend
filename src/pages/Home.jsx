@@ -4,13 +4,12 @@ import CategoryCard from '../components/CategoryCard'
 import axios from 'axios'
 import { BASE_URL } from '../services/api'
 import { Link } from 'react-router-dom'
-//
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/free-mode'
-//
+
 const Home = () => {
   const [categories, setCategories] = useState([])
   useEffect(() => {
