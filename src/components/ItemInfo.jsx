@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import { useParams } from 'react-router'
 import Client from '../services/api'
@@ -6,50 +5,54 @@ import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import axios from 'axios'
+import { BASE_URL } from '../services/api'
 
-const ItemInfo = ({ item, user, itemId }) => {
+const ItemInfo = ({ item, user }) => {
   const [selectedImage, setSelectedImage] = useState(0)
+  let navigate = useNavigate()
   const [orders, setOrders] = useState([])
   const [showModal, setShowModal] = useState(false)
   const [reviews, setReviews] = useState([])
+  const { itemId } = useParams()
+  const userid = user?.id
   const [review, setReview] = useState({
     review: '',
-    user: user?.id || null,
-    items: [itemId]
+    user: userid,
+    item: itemId
   })
 
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const response = await axios.get(`/${itemId}/reviews`)
-        setReviews(response.data)
-      } catch (err) {
-        console.error(err)
-      }
-    }
-    fetchReviews()
-  }, [itemId])
+  const closeModal = () => {
+    setShowModal(false)
+    navigate('/')
+  }
 
   const handleChange = (event) => {
     setReview({ ...review, [event.target.name]: event.target.value })
   }
 
+  useEffect(() => {
+    const reviewItem = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/${itemId}/reviews`)
+        setReviews(response.data)
+      } catch (error) {
+        console.error('Error Data Fetching:', error)
+      }
+    }
+    reviewItem()
+  }, [itemId])
+
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
-      const response = await Client.post(`/${itemId}/reviews`, {
-        review: review.review,
-        user: user?.id,
-        items: [itemId]
-      })
+      await Client.post(`${itemId}/reviews`, review)
       setReview({ review: '', user: user?.id, item: itemId })
+      console.log(review)
       setShowModal(true)
-      setReviews([...reviews, response.data])
     } catch (err) {
       console.error(err)
     }
   }
-  const closeModal = () => setShowModal(false)
 
   if (!item || !item.imgs || item.imgs.length === 0) {
     return <div>No image available.</div>
@@ -62,7 +65,7 @@ const ItemInfo = ({ item, user, itemId }) => {
 
     try {
       const response = await Client.post('/orders', {
-        user: user.id,
+        user: user?.id,
         items: [item._id]
       })
       setOrders([...orders, response.data])
@@ -117,6 +120,15 @@ const ItemInfo = ({ item, user, itemId }) => {
             />
             <button type="submit">Submit Review</button>
           </form>
+
+
+          {reviews.map((review, index) => (
+            <div key={index} className="review-card">
+              <p className="review-title">{review.user.name}</p>
+              <p>{review.review}</p>
+            </div>
+          ))}
+
           {showModal && (
             <>
               <div className="modal-overlay" onClick={closeModal}></div>
@@ -152,8 +164,8 @@ const ItemInfo = ({ item, user, itemId }) => {
             <button>Back to All items</button>
           </Link>
         )}
-     </div>
-  
+      </div>
+    </div>
   )
 }
 

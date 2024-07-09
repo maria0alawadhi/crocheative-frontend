@@ -65,10 +65,10 @@ const CartCard = ({ orders, onRemoveItem, onAddItem }) => {
         <div key={product._id} className="cart-card">
           <img src={product.imgs[0]} alt={product.name} />
           <span>{product.name}</span>
-          <span>  Price: {product.price} BD</span>
-          <span>  Quantity: {product.quantity} </span>
+          <span> Price: {product.price} BD</span>
+          <span> Quantity: {product.quantity} </span>
           <button
-            className="cartBtn"
+            className="cart-btn"
             onClick={() => handleRemoveItem(product.orderId, product._id)}
           >
             Remove
@@ -76,13 +76,11 @@ const CartCard = ({ orders, onRemoveItem, onAddItem }) => {
         </div>
       ))}
       {showConfirmation && (
-        <div className="confirmation-overlay">
-          <div className="confirmation-modal">
+        <div className="modal-overlay">
+          <div className="modal">
             <h3>Are you sure you want to remove this item?</h3>
-            <div>
-              <button onClick={confirmRemove}>Yes, remove it</button>
-              <button onClick={cancelRemove}>Cancel</button>
-            </div>
+            <button onClick={confirmRemove}>Yes</button>
+            <button onClick={cancelRemove}>Cancel</button>
           </div>
         </div>
       )}

@@ -6,21 +6,16 @@ import { BASE_URL } from '../services/api'
 import ItemInfo from '../components/ItemInfo'
 
 const ItemDetails = ({ user }) => {
-  const [item, setItem] = useState({ reviews: [] })
+  const [item, setItem] = useState(null)
   const { itemId, categoryName } = useParams()
 
   useEffect(() => {
     const getItem = async () => {
       try {
-        const itemResponse = await axios.get(
+        const response = await axios.get(
           `${BASE_URL}/${categoryName}/items/${itemId}`
         )
-        setItem(itemResponse.data)
-
-        const reviewsResponse = await axios.get(
-          `${BASE_URL}/${categoryName}/items/${itemId}/reviews`
-        )
-        setItem((prevItem) => ({ ...prevItem, reviews: reviewsResponse.data }))
+        setItem(response.data)
       } catch (error) {
         throw error
       }
@@ -30,7 +25,7 @@ const ItemDetails = ({ user }) => {
 
   return (
     <div>
-      <ItemInfo item={item} user={user} itemId={itemId} />
+      <ItemInfo item={item} user={user} />
     </div>
   )
 }
