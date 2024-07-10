@@ -1,11 +1,10 @@
 import '../App.css'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { RegisterUser } from '../services/Auth'
 
 const Register = () => {
   let navigate = useNavigate()
-
   const [formValues, setFormValues] = useState({
     name: '',
     email: '',
@@ -13,24 +12,55 @@ const Register = () => {
     confirmPassword: '',
     role: ''
   })
-
+  const [validity, setValidity] = useState('')
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
+    if (formValues.password.length < 7) {
+      setValidity('Password Must Contain At Least 8 Charcters .')
+    } else {
+      setValidity('')
+    }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await RegisterUser(formValues)
-    setFormValues({
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-      role: ''
-    })
-    navigate('/signin')
-  }
+    const { password, confirmPassword, email, name, role } = formValues
 
+    if (!password || !confirmPassword || !email || !name || !role) {
+      setValidity('Fill In Your Deatails Please.')
+      return
+    }
+
+    if (password !== confirmPassword) {
+      setValidity('Passwords Not Matching.')
+      setFormValues((prevValues) => ({
+        ...prevValues,
+        password: '',
+        confirmPassword: ''
+      }))
+      return
+    }
+
+    if (password.length < 8) {
+      setValidity('Password Must Contain At Least 8 Charcters .')
+      return
+    }
+
+    try {
+      await RegisterUser({ name, email, password, role })
+      setFormValues({
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        role: ''
+      })
+      navigate('/signin')
+    } catch (error) {
+      setValidity('Registration Failed')
+      console.error('Registration failed:', error)
+    }
+  }
   return (
     <>
       <div className="login-form">
@@ -39,7 +69,8 @@ const Register = () => {
           <form onSubmit={handleSubmit} className="reg">
             <div className="input-wrapper">
               <label htmlFor="name">Name</label>
-              <input id="inputs"
+              <input
+                id="inputs"
                 onChange={handleChange}
                 name="name"
                 type="text"
@@ -50,7 +81,8 @@ const Register = () => {
             </div>
             <div className="input-wrapper">
               <label htmlFor="email">Email</label>
-              <input id="inputs"
+              <input
+                id="inputs"
                 onChange={handleChange}
                 name="email"
                 type="email"
@@ -62,7 +94,8 @@ const Register = () => {
 
             <div className="input-wrapper">
               <label htmlFor="password">Password</label>
-              <input  id="inputs"
+              <input
+                id="inputs"
                 onChange={handleChange}
                 type="password"
                 name="password"
@@ -72,7 +105,8 @@ const Register = () => {
             </div>
             <div className="input-wrapper">
               <label htmlFor="confirmPassword">Confirm Password</label>
-              <input  id="inputs"
+              <input
+                id="inputs"
                 onChange={handleChange}
                 type="password"
                 name="confirmPassword"
@@ -109,6 +143,7 @@ const Register = () => {
             >
               Register
             </button>
+            <p className="validation-message">{validity}</p>
           </form>
         </div>
       </div>

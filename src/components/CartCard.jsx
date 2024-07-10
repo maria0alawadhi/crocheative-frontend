@@ -80,7 +80,7 @@ const CartCard = ({ orders, onRemoveItem, onAddItem }) => {
           <div className="modal">
             <h3>Are you sure you want to remove this item?</h3>
             <button className='cart-btn' onClick={confirmRemove}>Yes</button>
-            <button className='cart-btn' onClick={cancelRemove}>Cancel</button>
+            <button className='cart-btnc' onClick={cancelRemove}>Cancel</button>
           </div>
         </div>
       )}
